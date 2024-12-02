@@ -11,18 +11,18 @@ int main() {
   // TCP is the communication protocol
   // Transmission control protocol
 
-  int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  int sockfd = socket(AF_INET6, SOCK_STREAM, 0);
   if (sockfd == -1) {
     std::cout << "Failed to create socket. Error Number: " << errno << std::endl;
     exit(EXIT_FAILURE);
   }
   
   // Listen to port 9999 on any address
-  sockaddr_in sockaddr;
-  sockaddr.sin_family = AF_INET;
-  sockaddr.sin_addr.s_addr = INADDR_ANY;
+  sockaddr_in6 sockaddr;
+  sockaddr.sin6_family = AF_INET6;
+  sockaddr.sin6_addr= in6addr_any;
   //htons converts number to network byte order
-  sockaddr.sin_port = htons(9999);
+  sockaddr.sin6_port = htons(9999);
 
   if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
     std::cout << "Failed to bind to port 9999. Error Number: " << errno << std::endl;
